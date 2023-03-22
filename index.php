@@ -416,11 +416,11 @@ added responsibilities to meet team goals.
           </div>
 
           <?php
-if(!empty($_POST["send"])) {
-	$userName = $_POST["userName"];
-  $userEmail = $_POST["userEmail"];
-	$userPhone = $_POST["userPhone"];
-	$userMessage = $_POST["userMessage"];
+if(!empty($_POST["submit"])) {
+	$userName = $_POST["name"];
+  $userEmail = $_POST["email"];
+
+	$userMessage = $_POST["message"];
 	$toEmail = "mehiopsss@gmail.com";
   
 	$mailHeaders = "Name: " . $userName .
@@ -435,32 +435,37 @@ if(!empty($_POST["send"])) {
 ?>
 
 <div class="form-container">
-  <form name="contactFormEmail" method="post">
-    <div class="input-row">
-      <label>Name <em>*</em></label> 
-      <input type="text" name="userName" required id="userName"> 
-    </div>
-    <div class="input-row">
-      <label>Email <em>*</em></label> 
-      <input type="email" name="userEmail" required id="userEmail"> 
-    </div>
-    <div class="input-row">
-      <label>Phone <em>*</em></label> 
-      <input type="text" name="userPhone" required id="userPhone">
-    </div>
-    <div class="input-row">
-      <label>Message <em>*</em></label> 
-     <!-- <textarea name="userMessage" required id="userMessage"> -->
-    </div>
-    <div class="input-row">
-      <input type="submit" name="send" value="Submit">
-      <?php if (! empty($message)) {?>
+<form action="contact.php" method="post" role="form" class="php-email-form">
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label for="name">Your Name</label>
+                  <input type="text" name="name" class="form-control" id="name" required>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="name">Your Email</label>
+                  <input type="email" class="form-control" name="email" id="email" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="name">Subject</label>
+                <input type="text" class="form-control" name="subject" id="subject" required>
+              </div>
+              <div class="form-group">
+                <label for="name">Message</label>
+                <textarea class="form-control" name="message" rows="10" required></textarea>
+              </div>
+              <div class="my-3">
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Your message has been sent. Thank you!</div>
+              </div>
+              <div class="text-center"><button type="submit">Send Message</button>
+              <?php if (! empty($message)) {?>
       <div class='success'>
         <strong><?php echo $message; ?>	</strong>
       </div>
-      <?php } ?>
-    </div>
-  </form>
+      <?php } ?></div>
+            </form>
 </div>
 
         </div>
