@@ -92,6 +92,7 @@
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
               magna aliqua.
             </p>
+          </div>
             <div class="row">
               <div class="col-lg-6">
                 <ul>
@@ -111,9 +112,7 @@
               </div>
             </div>
             <p>
-              To seek and maintain full-time position that offers professional challenges 
-utilizing interpersonal skills, excellent time management and problem-solving skills. Organized and dependable candidate successful at 
-managing multiple priorities with a positive attitude. Willingness to take on 
+              To seek and maintain full-time position that offers professional challenges utilizing interpersonal skills, excellent time management and problem-solving skills. Organized and dependable candidate successful at managing multiple priorities with a positive attitude. Willingness to take on 
 added responsibilities to meet team goals.
             </p>
           </div>
@@ -386,12 +385,12 @@ added responsibilities to meet team goals.
 
         <div class="section-title">
           <h2>Contact</h2>
-       
+          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
         </div>
 
         <div class="row" data-aos="fade-in">
 
-          <div class="col-lg-12 d-flex align-items-stretch">
+          <div class="col-lg-5 d-flex align-items-stretch">
             <div class="info">
               <div class="address">
                 <i class="bi bi-geo-alt"></i>
@@ -410,32 +409,34 @@ added responsibilities to meet team goals.
                 <h4>Call:</h4>
                 <p>+977 9841306385</p>
               </div>
-              
             </div>
 
           </div>
 
+          <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
           <?php
-if(!empty($_POST["submit"])) {
-	$userName = $_POST["name"];
-  $userEmail = $_POST["email"];
-
-	$userMessage = $_POST["message"];
-	$toEmail = "mehiopsss@gmail.com";
+  if(isset($_POST['submit'])){
+    $mail= "mehiopsss@gmail.com";
+    $from = $_POST['email']; // senders email address
+    $name = $_POST['name']; // user name
+    $subject = $_POST['subject'];
+    $subject2 = "Your message submitted successful"; //this is for client
+    $message = "Client name: ". $name. "Wrote the following messsage". "/n/n". $_POST['message'];
+    $message2 ="Dear ". $name."Thank you for contacting us! We'll get back to you shortly";
+    $headers = "From: ". $from;
+    $headers2 = "From: ". $mail; // this will receive to client
+    $result = mail($mail, $subject, $message, $headers);//send email to user as well
+    $result2 = mail($from, $subject2, $message2, $headers2); //send email to user as well
+    if($result){ //if email is submitted succesfully
+        echo '<script type="text/javascript">alert("Message was sent Thank you ! we will contact you soon)</script> ';
+    }
+    else{
+       echo ' <script type="text/javascript">alert("Submisstion failed")</script>';
+    }
+    }
   
-	$mailHeaders = "Name: " . $userName .
-	"\r\n Email: ". $userEmail  . 
-	"\r\n Phone: ". $userPhone  . 
-	"\r\n Message: " . $userMessage . "\r\n";
-
-	if(mail($toEmail, $userName, $mailHeaders)) {
-	    $message = "Your contact information is received successfully.";
-	}
-}
 ?>
-
-<div class="form-container">
-<form action="contact.php" method="post" role="form" class="php-email-form">
+            <form action="contact.php" method="post" role="form" class="php-email-form">
               <div class="row">
                 <div class="form-group col-md-6">
                   <label for="name">Your Name</label>
@@ -459,19 +460,15 @@ if(!empty($_POST["submit"])) {
                 <div class="error-message"></div>
                 <div class="sent-message">Your message has been sent. Thank you!</div>
               </div>
-              <div class="text-center"><button type="submit">Send Message</button>
-              <?php if (! empty($message)) {?>
-      <div class='success'>
-        <strong><?php echo $message; ?>	</strong>
-      </div>
-      <?php } ?></div>
+              <div class="text-center"><button type="submit">Send Message</button></div>
             </form>
-</div>
+          </div>
 
         </div>
-        
+
       </div>
     </section><!-- End Contact Section -->
+
 
   </main><!-- End #main -->
 
