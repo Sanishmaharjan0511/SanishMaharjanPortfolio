@@ -92,6 +92,7 @@
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
               magna aliqua.
             </p>
+          </div>
             <div class="row">
               <div class="col-lg-6">
                 <ul>
@@ -111,10 +112,7 @@
               </div>
             </div>
             <p>
-              To seek and maintain full-time position that offers professional challenges 
-utilizing interpersonal skills, excellent time management and problem-solving skills. Organized and dependable candidate successful at 
-managing multiple priorities with a positive attitude. Willingness to take on 
-added responsibilities to meet team goals.
+              To seek and maintain full-time position that offers professional challenges utilizing interpersonal skills, excellent time management and problem-solving skills. Organized and dependable candidate successful at  managing multiple priorities with a positive attitude. Willingness to take on added responsibilities to meet team goals.
             </p>
           </div>
         </div>
@@ -416,30 +414,36 @@ added responsibilities to meet team goals.
           </div>
 
           <div class="col-lg-8 mt-5 mt-lg-0">
-
-            <form action="contact.php" method="post" role="form" class="php-email-form">
-              <div class="row">
-                <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
-                </div>
-                <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-                </div>
-              </div>
-              <div class="form-group mt-3">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-              </div>
-              <div class="form-group mt-3">
-                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-              </div>
-              <div class="my-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-              </div>
-              <div class="text-center"><button type="submit" name="submit">Send Message</button></div>
-            </form>
-
+ 
+            
+<div class="form-container">
+  <form name="contactFormEmail" method="post">
+    <div class="input-row">
+      <label>Name <em>*</em></label> 
+      <input type="text" name="userName" required id="userName"> 
+    </div>
+    <div class="input-row">
+      <label>Email <em>*</em></label> 
+      <input type="email" name="userEmail" required id="userEmail"> 
+    </div>
+    <div class="input-row">
+      <label>Phone <em>*</em></label> 
+      <input type="text" name="userPhone" required id="userPhone">
+    </div>
+    <div class="input-row">
+      <label>Message <em>*</em></label> 
+     <!-- <textarea name="userMessage" required id="userMessage"> -->
+    </div>
+    <div class="input-row">
+      <input type="submit" name="send" value="Submit">
+      <?php if (! empty($message)) {?>
+      <div class='success'>
+        <strong><?php echo $message; ?>	</strong>
+      </div>
+      <?php } ?>
+    </div>
+  </form>
+</div>
           </div>
 
         </div>

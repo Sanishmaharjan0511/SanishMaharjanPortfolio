@@ -1,25 +1,4 @@
-<?php
-  if(isset($_POST['submit'])){
-    $mail= "mehiopsss@gmail.com";
-    $from = $_POST['email']; // senders email address
-    $name = $_POST['name']; // user name
-    $subject = $_POST['subject'];
-    $subject2 = "Your message submitted successful"; //this is for client
-    $message = "Client name: ". $name. "Wrote the following messsage". "/n/n". $_POST['message'];
-    $message2 ="Dear ". $name."Thank you for contacting us! We'll get back to you shortly";
-    $headers = "From: ". $from;
-    $headers2 = "From: ". $mail; // this will receive to client
-    $result = mail($mail, $subject, $message, $headers);//send email to user as well
-    $result2 = mail($from, $subject2, $message2, $headers2); //send email to user as well
-    if($result){ //if email is submitted succesfully
-        echo '<script type="text/javascript">alert("Message was sent Thank you ! we will contact you soon)</script> ';
-    }
-    else{
-       echo ' <script type="text/javascript">alert("Submisstion failed")</script>';
-    }
-    }
-  
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -436,32 +415,53 @@ added responsibilities to meet team goals.
 
           </div>
 
-          <div class="col-lg-8 mt-5 mt-lg-0">
+          <?php
+if(!empty($_POST["send"])) {
+	$userName = $_POST["userName"];
+  $userEmail = $_POST["userEmail"];
+	$userPhone = $_POST["userPhone"];
+	$userMessage = $_POST["userMessage"];
+	$toEmail = "mehiopsss@gmail.com";
+  
+	$mailHeaders = "Name: " . $userName .
+	"\r\n Email: ". $userEmail  . 
+	"\r\n Phone: ". $userPhone  . 
+	"\r\n Message: " . $userMessage . "\r\n";
 
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-              <div class="row">
-                <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
-                </div>
-                <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-                </div>
-              </div>
-              <div class="form-group mt-3">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-              </div>
-              <div class="form-group mt-3">
-                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-              </div>
-              <div class="my-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-              </div>
-              <div class="text-center"><button type="submit">Send Message</button></div>
-            </form>
+	if(mail($toEmail, $userName, $mailHeaders)) {
+	    $message = "Your contact information is received successfully.";
+	}
+}
+?>
 
-          </div>
+<div class="form-container">
+  <form name="contactFormEmail" method="post">
+    <div class="input-row">
+      <label>Name <em>*</em></label> 
+      <input type="text" name="userName" required id="userName"> 
+    </div>
+    <div class="input-row">
+      <label>Email <em>*</em></label> 
+      <input type="email" name="userEmail" required id="userEmail"> 
+    </div>
+    <div class="input-row">
+      <label>Phone <em>*</em></label> 
+      <input type="text" name="userPhone" required id="userPhone">
+    </div>
+    <div class="input-row">
+      <label>Message <em>*</em></label> 
+     <!-- <textarea name="userMessage" required id="userMessage"> -->
+    </div>
+    <div class="input-row">
+      <input type="submit" name="send" value="Submit">
+      <?php if (! empty($message)) {?>
+      <div class='success'>
+        <strong><?php echo $message; ?>	</strong>
+      </div>
+      <?php } ?>
+    </div>
+  </form>
+</div>
 
         </div>
         
